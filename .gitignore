@@ -50,3 +50,15 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# GBDK Make Files
+*.asm
+*.ihx
+*.lst
+*.map
+*.noi
+*.sym
+
+# GB files
+*.sav
+*.gb
