@@ -1,5 +1,6 @@
 #include <gb/gb.h>
 #include <stdio.h>
+#include "smiles.c"
 
 void main(){
     /**
@@ -17,7 +18,39 @@ void main(){
      * 
      **/
     printf("HELLO WORLD");
-
+    
     // paste smiles main here and add a start button press wait... and get that working.
 
+    //the smirking man has two states, frown we'll call in at index zero
+    uint8_t currentspriteindex = 0;
+
+    //load the two faces from the smiles.c file where it's represented in assembly
+    //thank Mulder for his GBTD for ma windows toolset
+    set_sprite_data(0, 2, smiles);
+    set_sprite_tile(0, 0);
+    move_sprite(0, 88, 78);
+    SHOW_SPRITES;
+    waitpad(J_START);
+
+    /**
+     * I had some mucking about with the include dotC vs dotH
+     * more proof I don't know what i'm doing if anything but,
+     * the sprite does load in over the DRM nintendo had...
+     * 
+     * **/
+
+    //this while won't end, but it won't start until the previous waitpad sees the start button
+    while(1){
+        if (currentspriteindex == 0) {
+            currentspriteindex = 1;
+        }
+        else{
+            currentspriteindex = 0;
+        }
+        set_sprite_tile(0, currentspriteindex);
+        delay(1000);
+        scroll_sprite(0, 8, 0);
+    }
+    //once we've hit the start button our little chap will start smiling and scrolling along
+        //he'll also go off screen for a bit but don't worry his just off panel and will come around
 }
