@@ -18,4 +18,6 @@ void main(){
      **/
     printf("HELLO WORLD");
 
+    // paste smiles main here and add a start button press wait... and get that working.
+
 }
